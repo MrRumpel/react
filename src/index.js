@@ -14,8 +14,9 @@ class Square extends React.Component {
 
   render() {
     return (
-      <button className="square" onClick={() => alert('click')}>
-        {this.props.value}
+      <button className="square"
+        onClick={() => this.setState({ value: 'X' })}>
+        {this.state.value}
       </button>
     );
   }
@@ -23,7 +24,7 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square/>;
+    return <Square />;
   }
 
   render() {
@@ -57,7 +58,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board/>
+          <Board />
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
@@ -69,6 +70,6 @@ class Game extends React.Component {
 }
 
 ReactDOM.render(
-  <Game/>,
+  <Game />,
   document.getElementById('root')
 );
