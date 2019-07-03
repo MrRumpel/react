@@ -13,6 +13,9 @@
     "typescript": "3.5.2"
   },
   "devDependencies": {
+    "enhanced-resolve": "^4.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-scripts-ts": "^3.1.0",
     "tslint-language-service": "^0.9.9"
   },
   "scripts": {
