@@ -18,7 +18,7 @@ export default class Welcome extends React.Component<WelcomeProps, WelcomeState>
     constructor(props: Readonly<WelcomeProps>) {
         super(props);
         this.state = { date: new Date(), isShow: false };
-        this.listItems = this.numbers.map((number) => <li>{number}</li>);
+        this.listItems = this.numbers.map((number) => <li key={number.toString()}>{number}</li>);
     }
 
     render() {
