@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Calculator } from './Calculator';
+import { ChangeEvent, FormEvent } from 'react';
 
 
 
@@ -25,6 +27,7 @@ export default class Welcome extends React.Component<WelcomeProps, WelcomeState>
     render() {
         return <h1>
             Hello, {this.state.date.toLocaleTimeString()}
+            <Calculator />
             <br />
             <button onClick={() => this.clickTest(this.state.date)}>click me</button>
             <div>
@@ -63,11 +66,11 @@ export default class Welcome extends React.Component<WelcomeProps, WelcomeState>
         console.log(d);
     }
 
-    handleChange(event: any) {
+    handleChange(event: ChangeEvent<HTMLInputElement>) {
         this.setState({ value: event.target.value });
     }
 
-    handleSubmit(event: any) {
+    handleSubmit(event: FormEvent<HTMLFormElement>) {
         alert('提交的名字: ' + this.state.value);
         event.preventDefault();
     }
