@@ -1,38 +1,37 @@
 import React, { ChangeEvent } from 'react'
 
 interface Props {
-    scale: 'c' | 'f',
-    temperature: string,
-    onTemperatureChange: (n: string) => void,
+  scale: 'c' | 'f',
+  temperature: string,
+  onTemperatureChange: (n: string) => void,
 }
 
 interface State {
-    temperature: string,
+  temperature: string,
 
 }
 
 export class TemperatureInput extends React.Component<Props, State> {
-    scaleNames = {
-        c: 'Celsius',
-        f: 'Fahrenheit'
-    };
-    constructor(props: Readonly<Props>) {
-        super(props);
-        this.state = { temperature: '' };
-    }
+  scaleNames = {
+    c: 'Celsius',
+    f: 'Fahrenheit'
+  };
+  constructor(props: Readonly<Props>) {
+    super(props);
+    this.state = { temperature: '' };
+  }
 
-    render() {
-        return (
-            <fieldset>
-                <legend>Enter temperature in {this.scaleNames[this.props.scale]}:</legend>
-                <input value={this.props.temperature}
-                    onChange={(e) => this.handleChange(e)} />
-            </fieldset>
-        );
-    }
+  render() {
+    return (
+      <fieldset>
+        <legend>Enter temperature in {this.scaleNames[this.props.scale]}:</legend>
+        <input value={this.props.temperature}
+          onChange={(e) => this.handleChange(e)} />
+      </fieldset>
+    );
+  }
 
-    handleChange(e: ChangeEvent<HTMLInputElement>) {
-        // this.setState({ temperature: e.target.value });
-        this.props.onTemperatureChange(e.target.value);
-    }
+  handleChange(e: ChangeEvent<HTMLInputElement>) {
+    this.props.onTemperatureChange(e.target.value);
+  }
 }
