@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { BoilingVerdict } from "./BoilingVerdict";
+import { TemperatureInput } from "./TemperatureInput";
 
 interface Props { }
 
@@ -19,14 +20,10 @@ export class Calculator extends React.Component<Props, State> {
 
     render() {
         return (
-            <fieldset>
-                <legend>Enter temperature in Celsius:</legend>
-                <input
-                    value={this.state.temperature}
-                    onChange={(e) => this.handleChange(e)} />
-                <BoilingVerdict
-                    celsius={parseFloat(this.state.temperature)} />
-            </fieldset>
+            <div>
+                <TemperatureInput scale="c" />
+                <TemperatureInput scale="f" />
+            </div>
         );
     }
 }
