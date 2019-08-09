@@ -2,6 +2,8 @@ import React, { ChangeEvent } from 'react'
 
 interface Props {
     scale: 'c' | 'f',
+    temperature: string,
+    onTemperatureChange: (n: string) => void,
 }
 
 interface State {
@@ -23,13 +25,14 @@ export class TemperatureInput extends React.Component<Props, State> {
         return (
             <fieldset>
                 <legend>Enter temperature in {this.scaleNames[this.props.scale]}:</legend>
-                <input value={this.state.temperature}
+                <input value={this.props.temperature}
                     onChange={(e) => this.handleChange(e)} />
             </fieldset>
         );
     }
 
     handleChange(e: ChangeEvent<HTMLInputElement>) {
-        this.setState({ temperature: e.target.value });
+        // this.setState({ temperature: e.target.value });
+        this.props.onTemperatureChange(e.target.value);
     }
 }
