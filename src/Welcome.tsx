@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Calculator } from './Calculator';
 import { ChangeEvent, FormEvent } from 'react';
+import { HookStarter } from './HookStarter';
 
 
 
@@ -27,6 +28,8 @@ export default class Welcome extends React.Component<WelcomeProps, WelcomeState>
     render() {
         return <h1>
             Hello, {this.state.date.toLocaleTimeString()}
+            <HookStarter />
+            <br/>
             <Calculator />
             <br />
             <button onClick={() => this.clickTest(this.state.date)}>click me</button>
