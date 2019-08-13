@@ -1,80 +1,62 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, match } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { renderRoutes } from "react-router-config";
 
 interface Props { }
 
 export const Routes: React.SFC<Props> = props => {
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
-
-        <hr />
-
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/topics" component={Topics} />
-      </div>
-    </Router>
+    <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
   );
 };
+const Root = ({ route }: any) => (
+  <div>
+    <h1>Root</h1>
+    {/* child routes won't render without this */}
+    {renderRoutes(route.routes)}
+  </div>
+);
 
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
+const Home = ({ route }: any) => (
+  <div>
+    <h2>Home</h2>
+  </div>
+);
 
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
+const Child = ({ route }: any) => (
+  <div>
+    <h2>Child</h2>
+    {/* child routes won't render without this */}
+    {renderRoutes(route.routes, { someProp: "these extra props are optional" })}
+  </div>
+);
 
-function Topics({ match }) {
-  return (
-    <div>
-      <h2>Topics</h2>
-      <ul>
-        <li>
-          <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-        </li>
-      </ul>
+const GrandChild = ({ someProp }: any) => (
+  <div>
+    <h3>Grand Child</h3>
+    <div>{someProp}</div>
+  </div>
+);
 
-      <Route path={`${match.path}/:topicId`} component={Topic} />
-      <Route
-        exact
-        path={match.path}
-        render={() => <h3>Please select a topic.</h3>}
-      />
-    </div>
-  );
-}
-
-function Topic({ match }) {
-  return (
-    <div>
-      <h3>{match.params.topicId}</h3>
-    </div>
-  );
-}
+const routes = [
+  {
+    component: Root,
+    routes: [
+      {
+        path: "/",
+        exact: true,
+        component: Home
+      },
+      {
+        path: "/child/:id",
+        component: Child,
+        routes: [
+          {
+            path: "/child/:id/grand-child",
+            component: GrandChild
+          }
+        ]
+      }
+    ]
+  }
+];
