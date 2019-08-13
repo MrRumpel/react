@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import Welcome from './Welcome';
+import { Routes } from './route/Routes';
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <Routes />
         <Welcome name=' world'/>
         <a
           className="App-link"
